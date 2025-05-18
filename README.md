@@ -144,3 +144,5 @@ Resposta:
 * Para mais informações, consulte a [documentação oficial do Firebase Authentication](https://firebase.google.com/docs/auth/rest).
 
 ---
+
+Se quiser, posso ajudar a gerar o arquivo Postman Collection para você importar direto no Postman. Quer?
