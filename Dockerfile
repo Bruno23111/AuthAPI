@@ -11,8 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia o restante do código da aplicação
 COPY . .
 
-# Expõe a porta em que a aplicação rodará
-EXPOSE 8000
+# Expõe a porta 8080 (Cloud Run espera essa porta)
+EXPOSE 8080
 
-# Comando para rodar a aplicação usando uvicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Usa a variável de ambiente PORT (Cloud Run define isso automaticamente)
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT}"]
