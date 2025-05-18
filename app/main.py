@@ -1,9 +1,25 @@
 import os
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from .routes import router
 
 app = FastAPI()
+
+# Configure as origens que vão acessar sua API - substitua com as URLs corretas do seu frontend
+origins = [
+    "http://localhost:3000",  # Exemplo localhost React
+    "http://localhost:5500",  # Exemplo localhost para outro frontend
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Ou ["*"] para teste, mas não recomendado em produção
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(router, prefix="/api")
 
 @app.get("/")

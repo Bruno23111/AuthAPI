@@ -1,14 +1,16 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from firebase_admin import auth
 from .auth import verify_token
-from .models import Task, UserCreate
+from .models import TaskCreate, UserCreate
 from .crud import create_task, list_tasks, delete_task
 
 router = APIRouter()
 
 @router.post("/tasks")
-def add_task(task: Task, user_data=Depends(verify_token)):
-    create_task(user_data["uid"], task.dict())
+def add_task(task: TaskCreate, user_data=Depends(verify_token)):
+    task_data = task.dict()
+    task_data["creator_id"] = user_data["uid"]
+    create_task(task_data)
     return {"message": "Task created"}
 
 @router.get("/tasks")
@@ -32,7 +34,7 @@ def create_user(user: UserCreate, user_data=Depends(verify_token)):
 def list_users(user_data=Depends(verify_token)):
     try:
         users = []
-        page = auth.list_users().iterate_all()  # lista todos os usuários
+        page = auth.list_users().iterate_all()
         for user in page:
             users.append({
                 "uid": user.uid,
