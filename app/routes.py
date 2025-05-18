@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from firebase_admin import auth
 from .auth import verify_token
 from .models import Task, UserCreate
-from .crud import create_task, list_tasks
+from .crud import create_task, list_tasks, delete_task
 
 router = APIRouter()
 
@@ -53,3 +53,8 @@ def delete_user(uid: str, user_data=Depends(verify_token)):
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.delete("/tasks/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
+def remove_task(task_id: str, user_data=Depends(verify_token)):
+    delete_task(user_data["uid"], task_id)
+    return {"message": "Task deleted successfully"}

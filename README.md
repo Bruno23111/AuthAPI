@@ -135,6 +135,25 @@ Resposta:
   "message": "Usuário deletado com sucesso"
 }
 ```
+#### Criar Task
+
+*   **Método:** POST
+*   **URL:** `http://127.0.0.1:8000/tasks`
+*   **Headers:**
+    *   `Authorization: Bearer SEU_ID_TOKEN_AQUI`
+    *   `Content-Type: application/json`
+*   **Body:**
+json { "title": "Título da Task", "description": "Descrição opcional da task", "completed": false }
+---
+
+#### Deletar Task
+
+*   **Método:** DELETE
+*   **URL:** `http://127.0.0.1:8000/tasks/{task_id}`
+*   **Headers:**
+    *   `Authorization: Bearer SEU_ID_TOKEN_AQUI`
+
+    Substitua `{task_id}` pelo ID da task que você deseja deletar. Apenas o criador da task pode apagá-la.
 
 ---
 
