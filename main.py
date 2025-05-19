@@ -10,13 +10,12 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",  # Exemplo localhost React
     "http://localhost:5500",  # Exemplo localhost para outro frontend
-    "https://seu-frontend.com",  # Sua URL de produção (se tiver)
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # Ou ["*"] para teste, mas não recomendado em produção
-    allow_credentials=True,
+    allow_credentials=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
