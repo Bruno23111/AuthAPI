@@ -2,10 +2,14 @@ from .firebase import db
 from fastapi import HTTPException, status
 
 def create_task(user_id: str, task_data: dict):
-    # Incluir o user_id como creator_id na task_data antes de adicionar
     task_data["creator_id"] = user_id
     doc_ref, _ = db.collection("users").document(user_id).collection("tasks").add(task_data)
-    return {"task_id": doc_ref.id, **task_data}
+    # Pega o ID do documento criado
+    task_id = doc_ref.id
+    # Retorna a task criada, incluindo o id
+    return {"task_id": task_id, **task_data}
+
+
 
 def list_tasks(user_id: str):
     tasks = db.collection("users").document(user_id).collection("tasks").stream()

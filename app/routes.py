@@ -3,15 +3,27 @@ from firebase_admin import auth
 from .auth import verify_token
 from .models import TaskCreate, UserCreate
 from .crud import create_task, list_tasks, delete_task
+from fastapi.responses import JSONResponse
+from fastapi import status, Depends
+from fastapi.encoders import jsonable_encoder
 
 router = APIRouter()
 
-@router.post("/tasks")
+@router.post("/tasks", status_code=status.HTTP_201_CREATED)
 def add_task(task: TaskCreate, user_data=Depends(verify_token)):
     task_data = task.dict()
     task_data["creator_id"] = user_data["uid"]
-    create_task(task_data)
-    return {"message": "Task created"}
+    created_task = create_task(user_data["uid"], task_data)
+
+    response_data = {
+        "task": created_task,
+        "message": "Task criada com sucesso"
+    }
+
+    return JSONResponse(
+        status_code=status.HTTP_201_CREATED,
+        content=jsonable_encoder(response_data)
+    )
 
 @router.get("/tasks")
 def get_tasks(user_data=Depends(verify_token)):
