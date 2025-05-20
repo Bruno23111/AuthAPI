@@ -14,5 +14,5 @@ COPY . .
 # Expõe a porta 8080 (Cloud Run espera essa porta)
 EXPOSE 8080
 
-# Usa a variável de ambiente PORT (Cloud Run define isso automaticamente)
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT}"]
+# Usa a porta 8080 fixamente
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
