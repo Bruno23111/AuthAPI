@@ -1,0 +1,170 @@
+{
+    "info": {
+        "name": "API Tarefas",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Criar Tarefa",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"title\": \"Nova tarefa\",\n    \"description\": \"Descri\\u00e7\\u00e3o da tarefa\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/tasks",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "tasks"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Listar Tarefas",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/tasks",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "tasks"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Deletar Tarefa",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/tasks/:task_id",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "tasks",
+                        ":task_id"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Criar Usu\u00e1rio",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"email\": \"novo@email.com\",\n    \"password\": \"senha123\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/users",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "users"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Listar Usu\u00e1rios",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/users",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "users"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Deletar Usu\u00e1rio",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/users/:uid",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "users",
+                        ":uid"
+                    ]
+                }
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "https://minha-api-fastapi-874227477799.us-central1.run.app/api"
+        },
+        {
+            "key": "token",
+            "value": "COLE_SEU_TOKEN_AQUI"
+        }
+    ]
+}
