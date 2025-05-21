@@ -7,12 +7,9 @@ def mock_firestore(mocker):
     return mocker.patch("app.crud.db")
 
 def test_create_task(mock_firestore, mocker):
-    mock_doc_ref = mock_firestore.collection.return_value.document.return_value.collection.return_value.add.return_value
-    
-    # Simulando o comportamento do Firestore
     mock_doc_ref = mocker.Mock()
     mock_doc_ref.id = "mock_id"
-    
+
     mock_add = (
         mock_firestore
         .collection.return_value
@@ -20,7 +17,8 @@ def test_create_task(mock_firestore, mocker):
         .collection.return_value
         .add
     )
-    mock_add.return_value = (mock_doc_ref, None)
+    # Corrigido: o doc_ref esperado está no índice 1 da tupla, então mock no segundo elemento
+    mock_add.return_value = (None, mock_doc_ref)  
 
     user_id = "user123"
     task_data = {"title": "Test Task", "completed": False}
@@ -30,6 +28,8 @@ def test_create_task(mock_firestore, mocker):
     mock_add.assert_called_once()
     assert result["task_id"] == "mock_id"
     assert result["title"] == "Test Task"
+
+
 
 
 def test_list_tasks(mock_firestore, mocker):

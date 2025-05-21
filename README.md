@@ -163,3 +163,4 @@ json { "title": "Título da Task", "description": "Descrição opcional da task"
 * Para mais informações, consulte a [documentação oficial do Firebase Authentication](https://firebase.google.com/docs/auth/rest).
 
 ---
+Caso use o arquivo Postman, lembre-se de trocar o TOKEN pelo seu token de usuário.
